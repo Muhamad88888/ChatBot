@@ -5,9 +5,14 @@ import tiktoken
 client = OpenAI(api_key="YOUR_API_KEY")
 
 # --- Load Documents ---
-with open("data/docs.txt", "r", encoding="utf-8") as f:
-    docs = f.readlines()
 
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(BASE_DIR, "data", "docs.txt")
+
+with open(file_path, "r", encoding="utf-8") as f:
+    docs = f.readlines()
 # --- Create Embeddings ---
 def embed(text):
     return client.embeddings.create(
